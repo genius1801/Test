@@ -13,7 +13,7 @@ function Task($http, $q) {
             var user=this.user;
             var t;
             var deferred = $q.defer();
-            $http.get(Const.device+ "/js/json/task-odl.json').then(function (response) {
+            $http.get(Const.device+'/js/json/task-odl.json').then(function (response) {
                 t = response.data;
                 for(var i=0; i<t.length;i++){
                     if (t[i].login==user.login){
@@ -31,7 +31,7 @@ function Task($http, $q) {
             var deferred = $q.defer();
             var bool=false;
             var user=this.user;
-            $http.get(Const.device+ "/js/json/auth.json').then(function (response) {
+            $http.get(Const.device+ '/js/json/auth.json').then(function (response) {
                 var y=response.data;
                 for(var i in y){
                     console.log(user.login+"   "+y[i].login);

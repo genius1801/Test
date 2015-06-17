@@ -124,7 +124,7 @@
                         <div > 
                             <ul dnd-list="Process">
 
-                                <li ng-repeat="item in task| filter:'Process'|orderBy:'-priority'"
+                                <li ng-click="f(item)" ng-repeat="item in task| filter:'Process'|orderBy:'-priority'"
                                     dnd-draggable="item"
                                     dnd-moved="list.splice($index, 1)"
                                     dnd-effect-allowed="move"
@@ -151,7 +151,7 @@
                         <div > 
                             <ul dnd-list="Add">
 
-                                <li ng-repeat="item in task| filter:'Add'|orderBy:'-priority'"
+                                <li ng-click="f(item)" ng-repeat="item in task| filter:'Add'|orderBy:'-priority'"
                                     dnd-draggable="item"
                                     dnd-moved="list.splice($index, 1)"
                                     dnd-effect-allowed="move"
@@ -178,7 +178,7 @@
                         <div > 
                             <ul dnd-list="Complite">
 
-                                <li ng-repeat="item in task| filter:'Complite'|orderBy:'-priority'"
+                                <li ng-click="f(item)" ng-repeat="item in task| filter:'Complite'|orderBy:'-priority'"
                                     dnd-draggable="item"
                                     dnd-moved="list.splice($index, 1)"
                                     dnd-effect-allowed="move"
