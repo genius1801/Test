@@ -1,0 +1,203 @@
+<div>
+<div class="center"><input  type="checkbox" ng-model="checked"/><span>Scrum/table view</span></div>
+<div ng-if="checked" class="center" style="width:600px;">
+<input type="search"  placeholder="Filter by All Columns" ng-model="search"/>
+    <table class="center" style="width:auto;">
+        <thead style="background-color: lightgray;">
+          <tr>
+            <td></td>
+            <td ng-click="reverce=!reverce;order='name';">
+              Name
+            </td>
+            <td ng-click="reverce=!reverce;order='status';">Status</td>
+            <td ng-click="reverce=!reverce;order='description';">Description</td>
+              <td></td>
+          </tr>  
+        </thead>
+        <tbody>
+          <tr ng-repeat-start="person in task|filter:search| orderBy:order:reverce" ><!--ng-click="person.expanded = !person.expanded"-->
+            <td>
+              <button ng-if="person.expanded" ng-click="person.expanded = false">-</button>
+              <button ng-if="!person.expanded" ng-click="person.expanded = true">+</button>
+            </td>
+            <td><p  ng-click="f(person)">{{person.name}}</p></td><!--ui-sref="taskevent({name:person.name})"-->
+            <td>{{person.status}}</td>
+            <td>{{person.description}}</td>
+            <td><a ng-click="f(person)">Details</a></td>
+          </tr>
+          <tr ng-if="person.expanded" ng-repeat-end="">
+              <td colspan="3">
+                  <table>
+                    <thead style="background-color: lightgray;">
+                    <tr>
+                        <td></td>
+                        <td>Name </td>
+                        <td>Data</td>
+                        <td>Status</td>
+                        <td>Description</td>
+                    </tr>  
+                        </thead>
+        <tbody>
+                    <tr>  
+                        <td></td>
+                    <td>{{person.Name}}</td>
+                    <td>{{person.data}}</td>
+                    <td>{{person.status}}</td>
+                    <td>{{person.description}}</td>
+                    </tr>
+            </tbody>
+                  </table>
+                  </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<div ng-if="!checked">
+  
+    <!--<div style="width:100px; height:100px; background-color:red;" class="bin" droppable drop="handleDrop()" ng-repeat="bin in [1, 2, 3]" bin="bin" id="bin{{ bin }}">{{ bin }}</div>
+<div style="width:100px; height:100px; background-color:green;" class="item" id="item{{ item }}" ng-repeat="item in task| filter:status:'Process'" draggable item="item">{{item.Name}}</div>
+    <div style="width:100px; height:100px; background-color:blue;" class="item" id="item{{ item }}" ng-repeat="item in task| filter:status:'Complite'" draggable item="item">{{item.Name}}</div>-->
+<!--    <div class="center">
+          <div style="height:100%; width:100%" ng-model="task"  id="Process" ui-sortable="sortableOptions" ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Process</span><div  ng-repeat="item in task| filter:'Process'" taskdedail>
+              </div> 
+          </div>
+          <div style="height:100%; width:100%" ng-model="task" id="Add" ui-sortable="sortableOptions" ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Add</span><div ng-repeat="item in task| filter:'Add'" taskdedail>
+</div>
+          </div> 
+          <div style="height:100%; width:100%" ng-model="task" id="Complite" ui-sortable="sortableOptions" ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Complite</span><div  ng-repeat="item in task| filter:'Complite'" taskdedail>
+              </div>
+          </div>-->
+        
+        <!--<div class="center">
+          <div style="height:100%; width:100%" ng-model="task"  id="Process" droppable drop="handleDrop" ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Process</span><div  ng-repeat="item in task| filter:'Process'" draggable taskdedail>
+              </div> 
+          </div>
+          <div style="height:100%; width:100%" ng-model="task" id="Add" droppable drop="handleDrop" ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Add</span><div ng-repeat="item in task| filter:'Add'" draggable taskdedail>
+</div>
+          </div> 
+          <div style="height:100%; width:100%" ng-model="task" id="Complite" droppable drop="handleDrop"  ng-class="{'minimalList':sourceEmpty()}" class="min border connector">
+            <span>Complite</span><div  ng-repeat="item in task| filter:'Complite'" draggable item="item" taskdedail>
+              </div>
+          </div>-->
+	<!--<div>
+        <div class = "head"></div>
+
+	    <div class = "title">
+            Sortable example <br>
+        </div>
+
+        <h4>Пример 1</h4>
+        <div class = "container">
+
+            <ul class = "sortable sortable-1" dnd-container>
+                <li ng-repeat="item in task" dnd-sortable
+                    dnd-on-sortstart = "onSortStart()"
+                    dnd-on-sort = "onSort()"
+                    dnd-on-sortchange = "onSortChange()"
+                    dnd-on-sortend = "onSortEnd()"
+                    dnd-on-sortenter1 = "onSortEnter()"
+                ><taskdedail></taskdedail></li>
+            </ul>
+
+            <hr>
+
+            <ul class = "sortable sortable-2" >
+                <li ng-repeat="item in sortables2" dnd-sortable ><taskdedail></taskdedail></li>
+            </ul>
+
+        </div>-->
+<div class="simpleDemo row">
+
+    <div class="col-md-8">
+        <div class="row">
+            <div  class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Process</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div > 
+                            <ul dnd-list="Process">
+
+                                <li ng-repeat="item in task| filter:'Process'|orderBy:'-priority'"
+                                    dnd-draggable="item"
+                                    dnd-moved="list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item"
+                                    ng-class="{'selected': models.selected === item}"
+                                    >
+                                    <taskdedail></taskdedail>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="col-md-8">
+        <div class="row">
+            <div  class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div > 
+                            <ul dnd-list="Add">
+
+                                <li ng-repeat="item in task| filter:'Add'|orderBy:'-priority'"
+                                    dnd-draggable="item"
+                                    dnd-moved="list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item"
+                                    ng-class="{'selected': models.selected === item}"
+                                    >
+                                    <taskdedail></taskdedail>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div  class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Complite</h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div > 
+                            <ul dnd-list="Complite">
+
+                                <li ng-repeat="item in task| filter:'Complite'|orderBy:'-priority'"
+                                    dnd-draggable="item"
+                                    dnd-moved="list.splice($index, 1)"
+                                    dnd-effect-allowed="move"
+                                    dnd-selected="models.selected = item"
+                                    ng-class="{'selected': models.selected === item}"
+                                    >
+                                    <taskdedail></taskdedail>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+</div>
+
+<div ui-view></div>
+</div>
